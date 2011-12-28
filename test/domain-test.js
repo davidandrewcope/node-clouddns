@@ -15,6 +15,8 @@ var path = require('path')
 	, responses = require("./fixtures/responses")
 	, requests = require("./fixtures/requests");
 
+//TODO: These tests rely on a correctly stubbed out rackspace function
+// 	This needs updated to a big switch statement, that will return the expected response based on the request
 
 vows.describe('node-clouddns/domain').addBatch({
   "The node-clouddns client": {
@@ -246,7 +248,47 @@ vows.describe('node-clouddns/domain').addBatch({
         	client.rackspace = function(reqOpt, callback, success){
 				return success(responses.addRecords());
 			}
-        	domains[0].addRecord(self.callback);
+        	domains[0].addRecords(requests.addRecords(), self.callback);
+        });
+      },
+      "should not report an error": function (err, domain) {
+        assert.isNull(err);
+      }
+      , "should return domain object": function (err, domain) {
+      	assert.isObject(domain);
+      }
+    } 
+    , "when updating records": {
+      topic: function () {
+        var self = this;
+        client.rackspace = function(reqOpt, callback, success){
+      		return success(responses.getDomains());
+      	}
+        client.getDomains(function (err, domains) {
+        	client.rackspace = function(reqOpt, callback, success){
+				return success(responses.addRecords());
+			}
+        	domains[0].updateRecords(requests.addRecords(), self.callback);
+        });
+      },
+      "should not report an error": function (err, domain) {
+        assert.isNull(err);
+      }
+      , "should return domain object": function (err, domain) {
+      	assert.isObject(domain);
+      }
+    } 
+    , "when deleting records": {
+      topic: function () {
+        var self = this;
+        client.rackspace = function(reqOpt, callback, success){
+      		return success(responses.getDomains());
+      	}
+        client.getDomains(function (err, domains) {
+        	client.rackspace = function(reqOpt, callback, success){
+				return success(responses.addRecords());
+			}
+        	domains[0].deleteRecords(requests.addRecords(), self.callback);
         });
       },
       "should not report an error": function (err, domain) {

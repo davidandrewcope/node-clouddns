@@ -59,3 +59,42 @@ exports.createDomain = function createDomain(){
     "emailAddress" : "sample@rackspace.com"
   });
 }
+
+exports.addRecords = function addRecords(){
+	return {
+	  "records" : [ {
+		"name" : "ftp.example.com",
+		"type" : "A",
+		"data" : "192.0.2.8",
+		"ttl" : 5771
+	  }, {
+		"name" : "example.com",
+		"type" : "A",
+		"data" : "192.0.2.17",
+		"ttl" : 86400
+	  }, {
+		"name" : "example.com",
+		"type" : "NS",
+		"data" : "dns1.stabletransit.com",
+		"ttl" : 3600
+	  }, {
+		"name" : "example.com",
+		"type" : "NS",
+		"data" : "dns2.stabletransit.com",
+		"ttl" : 3600
+	  }, {
+		"name" : "example.com",
+		"priority" : 5,
+		"type" : "MX",
+		"data" : "mail.example.com",
+		"ttl" : 3600
+	  }, {
+		"name" : "www.example.com",
+		"type" : "CNAME",
+		"comment" : "This is a comment on the CNAME record",
+		"data" : "example.com",
+		"ttl" : 5400
+	  } ]
+	};
+
+}
