@@ -188,7 +188,6 @@ vows.describe('node-clouddns/domain').addBatch({
       		return success(responses.getDomains());
       	}
         client.getDomains(function (err, domains) {
-        	var count = domains.length;
         	domains[0].removeDomain(self.callback);
         });
       },
@@ -196,17 +195,45 @@ vows.describe('node-clouddns/domain').addBatch({
         assert.isNull(err);
       }
     }
-    /*, "when adding records": {
+    , "when listing subdomains": {
       topic: function () {
         var self = this;
+        client.rackspace = function(reqOpt, callback, success){
+      		return success(responses.getDomains());
+      	}
         client.getDomains(function (err, domains) {
-        	domains[0].getDetails(self.callback)
+        	client.rackspace = function(reqOpt, callback, success){
+				return success(responses.getDetails());
+			}
+
+           	domains[0].getSubDomains(self.callback)
         });
+      },
+      "should not report an error": function (err, domain) {
+        assert.isNull(err);
+      },
+      "should return an array of subdomains": function (err, domain) {
+        assert.isArray(domain);
+      }
+    }/*
+    , "when adding records": {
+      topic: function () {
+        var self = this;
+        client.rackspace = function(reqOpt, callback, success){
+      		return success(responses.getDomains());
+      	}
+        client.getDomains(function (err, domains) {
+        	
+        	domains[0].addRecord(self.callback);
+        });
+      },
+      "should not report an error": function (err, domain) {
+        assert.isNull(err);
       }
       , "should actually create the records": function (err, changes) {
       	assert.ok(err);
 		//TODO: Assert something here, like the total entries
       }
-    }*/
+    } */
   }
 }).export(module);
