@@ -1,10 +1,12 @@
 /*
- * container-test.js: Tests for Rackspace Cloudfiles containers
+ * domain-test.js: Tests for Rackspace Clouddns domains
  *
  * (C) 2010 Nodejitsu Inc.
+ * (C) 2011 Andrew Cope
  * MIT LICENSE
  *
  */
+
 
 var path = require('path')
 	, vows = require('vows')
