@@ -25,6 +25,9 @@ vows.describe('node-clouddns/domain').addBatch({
       	}
     	client.getDomains(this.callback);
       },
+      "should not report an error": function (err, domains) {
+        assert.isNull(err);
+      },
       "should return a list of domains": function (err, domains) {
         assert.isArray(domains);
       }
@@ -46,26 +49,41 @@ vows.describe('node-clouddns/domain').addBatch({
         	});
         });
       },
+      "should not report an error": function (err, domains) {
+        assert.isNull(err);
+      },
       "should return a list of domains": function (err, domains) {
         assert.isArray(domains);
       }
     }
   }
-})/*.addBatch({
+}).addBatch({
   "The Domain Object": {
     "when getting domain details": {
       topic: function () {
+        var self = this;
+      	client.rackspace = function(reqOpt, callback, success){
+      		return success(responses.getDomains());
+      	}
         client.getDomains(function (err, domains) {
-        	domains[0].getDetails(this.callback)
+        	client.rackspace = function(reqOpt, callback, success){
+				return success(responses.getDetails());
+			}
+
+           	domains[0].getDetails(self.callback)
         });
       },
-      "should populate the nameservers, and recordsList properties": function (err, domain) {
-      	assert.ok(err);
+      "should not report an error": function (err, domain) {
+        assert.isNull(err);
+      },
+      "should populate the nameservers property": function (err, domain) {
         assert.isArray(domain.nameservers);
-        assert.isArray(domain.recordsList);
+      },
+      "should populate the recordsList property": function (err, domain) {
+        assert.isArray(domain.recordsList.records);
       }
     }
-    , "when getting domain changes": {
+    /*, "when getting domain changes": {
       topic: function () {
         client.getDomains(function (err, domains) {
         	domains[0].getChanges(this.callback);
@@ -146,6 +164,6 @@ vows.describe('node-clouddns/domain').addBatch({
       	assert.ok(err);
 		//TODO: Assert something here, like the total entries
       }
-    }
+    }*/
   }
-})*/.export(module);
+}).export(module);
