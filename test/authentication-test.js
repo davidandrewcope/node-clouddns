@@ -15,7 +15,7 @@ var path = require('path'),
     
 var client = helpers.createClient();
 
-vows.describe('node-cloudfiles/authentication').addBatch({
+vows.describe('node-clouddns/authentication').addBatch({
   "The node-cloudfiles client": {
     "with a valid username and api key": {
       topic: function () {

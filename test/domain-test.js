@@ -144,21 +144,26 @@ vows.describe('node-clouddns/domain').addBatch({
         assert.isArray(domains);
       }
     }
-    /*, "when importing a domain": {
+    , "when importing a domain": {
       topic: function () {
         var self = this;
+        client.rackspace = function(reqOpt, callback, success){
+      		return success(responses.getDomains());
+      	}
         client.getDomains(function (err, domains) {
-        	//TODO: add bind9 data
-        	var bind9data = "";
+        	var bind9data = "\n    \t\texample.net. 3600 IN SOA ns.rackspace.com.\n\t\t\tsample@rackspace.com. 1308874739 3600 3600 3600 3600\n\t\t\texample.net. 86400 IN A 110.11.12.16\n\t\t\texample.net. 3600 IN MX 5 mail2.example.net.\n\t\t\twww.example.net. 5400 IN CNAME example.net.\t\t\n\t\t";
         	
         	domains[0].importDomain(bind9data, self.callback);
         });
       },
-      "should actually create the domain": function (err, changes) {
-      	assert.ok(err);
-		//TODO: Assert something here, like the total entries
+      "should not report an error": function (err, domains) {
+        assert.isNull(err);
+      },
+      "should return the created domain": function (err, domain) {
+        assert.isObject(domain);
       }
-    }, "when updating a domain": {
+    }
+    /*, "when updating a domain": {
       topic: function () {
         var self = this;
         client.getDomains(function (err, domains) {
