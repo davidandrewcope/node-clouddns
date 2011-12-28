@@ -181,25 +181,22 @@ vows.describe('node-clouddns/domain').addBatch({
         assert.isObject(domain);
       }
     }
-    /*, "when removing a domain": {
+    , "when removing a domain": {
       topic: function () {
         var self = this;
+        client.rackspace = function(reqOpt, callback, success){
+      		return success(responses.getDomains());
+      	}
         client.getDomains(function (err, domains) {
         	var count = domains.length;
-        	domains[0].removeDomain(function(err){
-        		this.callback(err, count);
-        	});
+        	domains[0].removeDomain(self.callback);
         });
       },
-      "should actually remove the domain": function (err, count) {
-      	assert.ok(err);
-		client.getDomains(function (err, domains) {
-			assert.ok(err);
-        	assert.equals(count - 1, domains.length)
-        });
+      "should not report an error": function (err, domain) {
+        assert.isNull(err);
       }
     }
-    , "when adding records": {
+    /*, "when adding records": {
       topic: function () {
         var self = this;
         client.getDomains(function (err, domains) {
