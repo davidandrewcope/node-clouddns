@@ -2,24 +2,24 @@
   "name": "clouddns",
   "description": "A client implementation for Rackspace Cloud DNS in node.js",
   "version": "0.0.1",
-  "author": "Erik Hedenström <erik@hedenstroem.com>",
+  "author": "Andrew Cope <davidandrewcope@gmail.com>",
   "repository": {
     "type": "git",
-    "url" : "http://github.com/ehedenst/node-clouddns.git"
+    "url" : "http://github.com/davidandrewcope/node-clouddns.git"
   },
   "keywords": ["cloud computing", "api", "rackspace cloud", "cloud dns", "dns"],
   "dependencies": {
     "pkginfo": "0.2.x",
-    "request": "2.1.x"
+    "request": "2.9.x"
   },
   "devDependencies": {
-    "vows": "0.5.x"
+    "vows": "0.6.x"
   },
   "main": "./lib/clouddns",
   "scripts": {
     "test": "vows test/*-test.js --spec"
   },
   "engines": {
-    "node": ">= 0.4.0"
+    "node": ">= 0.6.6"
   }
 }
