@@ -83,21 +83,31 @@ vows.describe('node-clouddns/domain').addBatch({
         assert.isArray(domain.recordsList.records);
       }
     }
-    /*, "when getting domain changes": {
+    , "when getting domain changes": {
       topic: function () {
+        var self = this;
+      	client.rackspace = function(reqOpt, callback, success){
+      		return success(responses.getDomains());
+      	}
         client.getDomains(function (err, domains) {
-        	domains[0].getChanges(this.callback);
+			client.rackspace = function(reqOpt, callback, success){
+				return success(responses.getChanges());
+			}
+        	domains[0].getChanges(self.callback);
         });
       },
+      "should not report an error": function (err, changes) {
+        assert.isNull(err);
+      },
       "should return a list of changes": function (err, changes) {
-      	assert.ok(err);
         assert.isArray(changes.changes);
       }
     }
-    , "when exporting a domain": {
+    /*, "when exporting a domain": {
       topic: function () {
+        var self = this;
         client.getDomains(function (err, domains) {
-        	domains[0].getExport(this.callback);
+        	domains[0].getExport(self.callback);
         });
       },
       "should return a string with the BIND9 db file contents": function (err, bind9data) {
@@ -107,8 +117,9 @@ vows.describe('node-clouddns/domain').addBatch({
     }
     , "when creating a sub domain": {
       topic: function () {
+        var self = this;
         client.getDomains(function (err, domains) {
-        	domains[0].createSubDomain(this.callback);
+        	domains[0].createSubDomain(self.callback);
         });
       },
       "should actually create the sub domain": function (err, changes) {
@@ -116,11 +127,12 @@ vows.describe('node-clouddns/domain').addBatch({
       }
     }, "when importing a domain": {
       topic: function () {
+        var self = this;
         client.getDomains(function (err, domains) {
         	//TODO: add bind9 data
         	var bind9data = "";
         	
-        	domains[0].importDomain(bind9data, this.callback);
+        	domains[0].importDomain(bind9data, self.callback);
         });
       },
       "should actually create the domain": function (err, changes) {
@@ -129,9 +141,10 @@ vows.describe('node-clouddns/domain').addBatch({
       }
     }, "when updating a domain": {
       topic: function () {
+        var self = this;
         client.getDomains(function (err, domains) {
         	domains[0].comment = domains[0].comment + " updated";
-        	domains[0].getDetails(this.callback)
+        	domains[0].getDetails(self.callback)
         });
       },
       "should actually update the domain": function (err, domain) {
@@ -140,6 +153,7 @@ vows.describe('node-clouddns/domain').addBatch({
       }
     }, "when removing a domain": {
       topic: function () {
+        var self = this;
         client.getDomains(function (err, domains) {
         	var count = domains.length;
         	domains[0].removeDomain(function(err){
@@ -156,8 +170,9 @@ vows.describe('node-clouddns/domain').addBatch({
       }
     }, "when adding records": {
       topic: function () {
+        var self = this;
         client.getDomains(function (err, domains) {
-        	domains[0].getDetails(this.callback)
+        	domains[0].getDetails(self.callback)
         });
       },
       "should actually create the records": function (err, changes) {

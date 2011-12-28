@@ -255,3 +255,115 @@ exports.getDetails = function getDetails() {
 }); 
 
 };
+
+exports.getChanges = function getChanges() {
+	return JSON.stringify({
+  "from" : "2011-09-13T05:00:00.000+0000",
+  "to" : "2011-09-19T21:36:01.000+0000",
+  "totalEntries" : 4,
+  "changes" : [ {
+    "domain" : "rs.example.com",
+    "action" : "update",
+    "changeDetails" : [ {
+      "field" : "serial_number",
+      "newValue" : "1315930302",
+      "originalValue" : "1315927395"
+    }, {
+      "field" : "updated_at",
+      "newValue" : "Tue Sep 13 16:11:42 UTC 2011",
+      "originalValue" : "Tue Sep 13 15:23:15 UTC 2011"
+    } ],
+    "accountId" : 1234,
+    "targetId" : 45678,
+    "targetType" : "Domain"
+  }, {
+    "domain" : "rs.example.com",
+    "action" : "create",
+    "changeDetails" : [ {
+      "field" : "created_at",
+      "newValue" : "Tue Sep 13 16:11:42 UTC 2011",
+      "originalValue" : ""
+    }, {
+      "field" : "ttl",
+      "newValue" : "3600",
+      "originalValue" : ""
+    }, {
+      "field" : "fqdn",
+      "newValue" : "rs.example.com",
+      "originalValue" : ""
+    }, {
+      "field" : "updated_at",
+      "newValue" : "Tue Sep 13 16:11:42 UTC 2011",
+      "originalValue" : ""
+    }, {
+      "field" : "destination",
+      "newValue" : "mail.rs.example.com",
+      "originalValue" : ""
+    }, {
+      "field" : "priority",
+      "newValue" : "1",
+      "originalValue" : ""
+    }, {
+      "field" : "id",
+      "newValue" : "222222",
+      "originalValue" : ""
+    }, {
+      "field" : "zone_id",
+      "newValue" : "45678",
+      "originalValue" : ""
+    } ],
+    "targetId" : 222222,
+    "targetType" : "MX Record"
+  }, {
+    "domain" : "rs.example.com",
+    "action" : "update",
+    "changeDetails" : [ {
+      "field" : "serial_number",
+      "newValue" : "1315927395",
+      "originalValue" : "1310656481"
+    }, {
+      "field" : "updated_at",
+      "newValue" : "Tue Sep 13 15:23:15 UTC 2011",
+      "originalValue" : "Thu Jul 14 15:14:41 UTC 2011"
+    } ],
+    "accountId" : 1234,
+    "targetId" : 45678,
+    "targetType" : "Domain"
+  }, {
+    "domain" : "rs.example.com",
+    "action" : "create",
+    "changeDetails" : [ {
+      "field" : "created_at",
+      "newValue" : "Tue Sep 13 15:23:15 UTC 2011",
+      "originalValue" : ""
+    }, {
+      "field" : "ttl",
+      "newValue" : "3600",
+      "originalValue" : ""
+    }, {
+      "field" : "fqdn",
+      "newValue" : "*.rs.example.com",
+      "originalValue" : ""
+    }, {
+      "field" : "updated_at",
+      "newValue" : "Tue Sep 13 15:23:15 UTC 2011",
+      "originalValue" : ""
+    }, {
+      "field" : "destination",
+      "newValue" : "rs.example.com",
+      "originalValue" : ""
+    }, {
+      "field" : "id",
+      "newValue" : "87654",
+      "originalValue" : ""
+    }, {
+      "field" : "zone_id",
+      "newValue" : "45678",
+      "originalValue" : ""
+    } ],
+    "targetId" : 87654,
+    "targetType" : "CNAME Record"
+  } ]
+}); 
+
+};
