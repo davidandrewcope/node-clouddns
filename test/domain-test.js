@@ -163,19 +163,25 @@ vows.describe('node-clouddns/domain').addBatch({
         assert.isObject(domain);
       }
     }
-    /*, "when updating a domain": {
+    , "when updating a domain": {
       topic: function () {
         var self = this;
+        client.rackspace = function(reqOpt, callback, success){
+      		return success(responses.getDomains());
+      	}
         client.getDomains(function (err, domains) {
         	domains[0].comment = domains[0].comment + " updated";
         	domains[0].getDetails(self.callback)
         });
       },
-      "should actually update the domain": function (err, domain) {
-      	assert.ok(err);
-		assert.equals("updated", domain.comment.indexOf(-7));
+      "should not report an error": function (err, domain) {
+        assert.isNull(err);
+      },
+      "should return the updated domain": function (err, domain) {
+        assert.isObject(domain);
       }
-    }, "when removing a domain": {
+    }
+    /*, "when removing a domain": {
       topic: function () {
         var self = this;
         client.getDomains(function (err, domains) {
@@ -192,14 +198,15 @@ vows.describe('node-clouddns/domain').addBatch({
         	assert.equals(count - 1, domains.length)
         });
       }
-    }, "when adding records": {
+    }
+    , "when adding records": {
       topic: function () {
         var self = this;
         client.getDomains(function (err, domains) {
         	domains[0].getDetails(self.callback)
         });
-      },
-      "should actually create the records": function (err, changes) {
+      }
+      , "should actually create the records": function (err, changes) {
       	assert.ok(err);
 		//TODO: Assert something here, like the total entries
       }
