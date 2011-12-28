@@ -212,8 +212,28 @@ vows.describe('node-clouddns/domain').addBatch({
       "should not report an error": function (err, domain) {
         assert.isNull(err);
       },
-      "should return an array of subdomains": function (err, domain) {
-        assert.isArray(domain);
+      "should return an array of subdomains": function (err, subdomains) {
+        assert.isArray(subdomains);
+      }
+    }, "when listing records": {
+      topic: function () {
+        var self = this;
+        client.rackspace = function(reqOpt, callback, success){
+      		return success(responses.getDomains());
+      	}
+        client.getDomains(function (err, domains) {
+        	client.rackspace = function(reqOpt, callback, success){
+				return success(responses.getDetails());
+			}
+
+           	domains[0].getRecords(self.callback)
+        });
+      },
+      "should not report an error": function (err, domain) {
+        assert.isNull(err);
+      },
+      "should return an array of records": function (err, records) {
+        assert.isArray(records);
       }
     }
     , "when adding records": {
