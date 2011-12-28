@@ -215,7 +215,7 @@ vows.describe('node-clouddns/domain').addBatch({
       "should return an array of subdomains": function (err, domain) {
         assert.isArray(domain);
       }
-    }/*
+    }
     , "when adding records": {
       topic: function () {
         var self = this;
@@ -223,17 +223,18 @@ vows.describe('node-clouddns/domain').addBatch({
       		return success(responses.getDomains());
       	}
         client.getDomains(function (err, domains) {
-        	
+        	client.rackspace = function(reqOpt, callback, success){
+				return success(responses.addRecords());
+			}
         	domains[0].addRecord(self.callback);
         });
       },
       "should not report an error": function (err, domain) {
         assert.isNull(err);
       }
-      , "should actually create the records": function (err, changes) {
-      	assert.ok(err);
-		//TODO: Assert something here, like the total entries
+      , "should return domain object": function (err, domain) {
+      	assert.isObject(domain);
       }
-    } */
+    } 
   }
 }).export(module);

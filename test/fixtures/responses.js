@@ -377,3 +377,61 @@ exports.getExport = function getExport() {
 }); 
 
 };
+
+exports.addRecords = function addRecords() {
+	return JSON.stringify({
+  "totalEntries" : 6,
+  "records" : [ {
+    "name" : "ftp.example.com",
+    "id" : "A-6817754",
+    "type" : "A",
+    "data" : "192.0.2.8",
+    "ttl" : 5771,
+    "updated" : "2011-05-19T13:07:08.000+0000",
+    "created" : "2011-05-18T19:53:09.000+0000"
+  }, {
+    "name" : "example.com",
+    "id" : "A-6822994",
+    "type" : "A",
+    "data" : "192.0.2.17",
+    "ttl" : 86400,
+    "updated" : "2011-06-24T01:12:52.000+0000",
+    "created" : "2011-06-24T01:12:52.000+0000"
+  }, {
+    "name" : "example.com",
+    "id" : "NS-6251982",
+    "type" : "NS",
+    "data" : "dns1.stabletransit.com",
+    "ttl" : 3600,
+    "updated" : "2011-06-24T01:12:51.000+0000",
+    "created" : "2011-06-24T01:12:51.000+0000"
+  }, {
+    "name" : "example.com",
+    "id" : "NS-6251983",
+    "type" : "NS",
+    "data" : "dns2.stabletransit.com",
+    "ttl" : 3600,
+    "updated" : "2011-06-24T01:12:51.000+0000",
+    "created" : "2011-06-24T01:12:51.000+0000"
+  }, {
+    "name" : "example.com",
+    "id" : "MX-3151218",
+    "priority" : 5,
+    "type" : "MX",
+    "data" : "mail.example.com",
+    "ttl" : 3600,
+    "updated" : "2011-06-24T01:12:53.000+0000",
+    "created" : "2011-06-24T01:12:53.000+0000"
+  }, {
+    "name" : "www.example.com",
+    "id" : "CNAME-9778009",
+    "type" : "CNAME",
+    "comment" : "This is a comment on the CNAME record",
+    "data" : "example.com",
+    "ttl" : 5400,
+    "updated" : "2011-06-24T01:12:54.000+0000",
+    "created" : "2011-06-24T01:12:54.000+0000"
+  } ]
+}); 
+
+};
