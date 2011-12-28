@@ -140,8 +140,8 @@ vows.describe('node-clouddns/domain').addBatch({
       "should not report an error": function (err, domains) {
         assert.isNull(err);
       },
-      "should return a list of domains": function (err, domains) {
-        assert.isArray(domains);
+      "should return the updated parent domain object": function (err, domain) {
+        assert.isObject(domain);
       }
     }
     , "when importing a domain": {
