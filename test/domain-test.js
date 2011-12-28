@@ -12,7 +12,8 @@ var path = require('path')
 	, helpers = require('./helpers')
 	, clouddns = require('../lib/clouddns')
 	, client = helpers.createClient()
-	, responses = require("./fixtures/responses");
+	, responses = require("./fixtures/responses")
+	, requests = require("./fixtures/requests");
 
 
 vows.describe('node-clouddns/domain').addBatch({
@@ -25,29 +26,28 @@ vows.describe('node-clouddns/domain').addBatch({
     	client.getDomains(this.callback);
       },
       "should return a list of domains": function (err, domains) {
-      	console.dir(domains);
-      	
         assert.isArray(domains);
       }
     }, "when creating domains": {
       topic: function () {
+        var self = this;
       	client.rackspace = function(reqOpt, callback, success){
-      		return success(null, responses.getDomains);
+      		return success(responses.getDomains());
       	}
       	client.getDomains(function (err, oldDomains) {
         	var count = oldDomains.length;
         	
         	client.rackspace = function(reqOpt, callback, success){
-	      		return success(null, responses.createDomain);
+	      		return success(responses.createDomain());
 	      	}
-        	client.createDomain(domainObj, function(err, newDomains){
-        		this.callback(err, newDomains, count)
+	      	
+        	client.createDomain(requests.createDomain, function(err, newDomains){
+        		self.callback(err, newDomains, count)
         	});
         });
       },
-      "should actually create the domain": function (err, newDomains, count) {
-      	assert.ok(err);
-        assert.equals(count + 1, newDomains.length);
+      "should return a list of domains": function (err, domains) {
+        assert.isArray(domains);
       }
     }
   }

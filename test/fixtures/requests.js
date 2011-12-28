@@ -1,6 +1,5 @@
 exports.createDomain = function createDomain(){
-	return JSON.stringify({
-  "domains" : [ {
+	return JSON.stringify( {
     "name" : "example.com",
     "comment" : "Optional domain comment...",
     "recordsList" : {
@@ -58,6 +57,5 @@ exports.createDomain = function createDomain(){
     },
     "ttl" : 3600,
     "emailAddress" : "sample@rackspace.com"
-  } ]
-});
+  });
 }
