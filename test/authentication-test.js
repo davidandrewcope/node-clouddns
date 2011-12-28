@@ -1,51 +1,58 @@
-require.paths.unshift(require('path').join(__dirname, '..', 'lib'));
+/*
+ * authentication-test.js: Tests for Rackspace Cloudfiles authentication
+ *
+ * (C) 2010 Nodejitsu Inc.
+ * MIT LICENSE
+ *
+ */
 
-var path = require('path');
-var vows = require('vows');
-var assert = require('assert');
-var helpers = require('./helpers');
-var clouddns = require('clouddns');
-
+var path = require('path'),
+    vows = require('vows'),
+    assert = require('assert'),
+    helpers = require('./helpers'),
+    cloudfiles = require('../lib/clouddns');
+    
+    
 var client = helpers.createClient();
 
-vows.describe('node-clouddns/authentication').addBatch({
-  "The node-clouddns client": {
+vows.describe('node-cloudfiles/authentication').addBatch({
+  "The node-cloudfiles client": {
     "with a valid username and api key": {
       topic: function () {
         client.setAuth(this.callback);
       },
       "should respond with 204 and appropriate headers": function (err, res) {
-        assert.equal(res.statusCode, 204);
+        assert.isNull(err);
+        assert.equal(res.statusCode, 204); 
         assert.isObject(res.headers);
         assert.include(res.headers, 'x-server-management-url');
         assert.include(res.headers, 'x-storage-url');
         assert.include(res.headers, 'x-cdn-management-url');
         assert.include(res.headers, 'x-auth-token');
-        assert.include(res.headers, 'x-storage-token');
       },
       "should update the config with appropriate urls": function (err, res) {
+        assert.isNull(err);
         assert.equal(res.headers['x-server-management-url'], client.config.serverUrl);
         assert.equal(res.headers['x-storage-url'], client.config.storageUrl);
         assert.equal(res.headers['x-cdn-management-url'], client.config.cdnUrl);
         assert.equal(res.headers['x-auth-token'], client.config.authToken);
-        assert.equal(res.headers['x-storage-token'], client.config.storageToken);
-        assert.isDefined(client.config.accountId);
-        assert.isDefined(client.config.dnsUrl);
       }
     },
     "with an invalid username and api key": {
       topic: function () {
-        var invalidClient = clouddns.createClient({
+        var invalidClient = cloudfiles.createClient({ 
           auth: {
-            username: 'invalid-username',
+            username: 'invalid-username', 
             apiKey: 'invalid-apikey'
           }
         });
+        
         invalidClient.setAuth(this.callback);
       },
-      "should respond with 401": function (err, res) {
+      "should respond with 401 and return an error": function (err, res) {
+        assert.ok(err instanceof Error);
         assert.equal(res.statusCode, 401);
       }
-    }
+    },
   }
 }).export(module);
