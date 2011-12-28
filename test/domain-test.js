@@ -20,22 +20,26 @@ vows.describe('node-clouddns/domain').addBatch({
     "when listing domains": {
       topic: function () {
       	client.rackspace = function(reqOpt, callback, success){
-      		console.log("rackspace called");
-      		console.dir(responses.getDomains());
       		return success(responses.getDomains());
       	}
-        client.getDomains(this.callback);
+    	client.getDomains(this.callback);
       },
       "should return a list of domains": function (err, domains) {
+      	console.dir(domains);
+      	
         assert.isArray(domains);
       }
-    }/*, "when creating domains": {
+    }, "when creating domains": {
       topic: function () {
       	client.rackspace = function(reqOpt, callback, success){
       		return success(null, responses.getDomains);
       	}
       	client.getDomains(function (err, oldDomains) {
         	var count = oldDomains.length;
+        	
+        	client.rackspace = function(reqOpt, callback, success){
+	      		return success(null, responses.createDomain);
+	      	}
         	client.createDomain(domainObj, function(err, newDomains){
         		this.callback(err, newDomains, count)
         	});
@@ -45,7 +49,7 @@ vows.describe('node-clouddns/domain').addBatch({
       	assert.ok(err);
         assert.equals(count + 1, newDomains.length);
       }
-    }*/
+    }
   }
 })/*.addBatch({
   "The Domain Object": {
