@@ -103,29 +103,48 @@ vows.describe('node-clouddns/domain').addBatch({
         assert.isArray(changes.changes);
       }
     }
-    /*, "when exporting a domain": {
+    , "when exporting a domain": {
       topic: function () {
         var self = this;
+      	client.rackspace = function(reqOpt, callback, success){
+      		return success(responses.getDomains());
+      	}
         client.getDomains(function (err, domains) {
+        	client.rackspace = function(reqOpt, callback, success){
+				return success(responses.getExport());
+			}
         	domains[0].getExport(self.callback);
         });
       },
+      "should not report an error": function (err, bind9data) {
+        assert.isNull(err);
+      },
       "should return a string with the BIND9 db file contents": function (err, bind9data) {
-      	assert.ok(err);
+      	assert.isString(bind9data);
 		//TODO: Assert something here
       }
     }
     , "when creating a sub domain": {
       topic: function () {
         var self = this;
+      	client.rackspace = function(reqOpt, callback, success){
+      		return success(responses.getDomains());
+      	}
         client.getDomains(function (err, domains) {
+            client.rackspace = function(reqOpt, callback, success){
+				return success(responses.createDomain());
+			}
         	domains[0].createSubDomain(self.callback);
         });
       },
-      "should actually create the sub domain": function (err, changes) {
-		//TODO: Assert something here, like the total entries
+      "should not report an error": function (err, domains) {
+        assert.isNull(err);
+      },
+      "should return a list of domains": function (err, domains) {
+        assert.isArray(domains);
       }
-    }, "when importing a domain": {
+    }
+    /*, "when importing a domain": {
       topic: function () {
         var self = this;
         client.getDomains(function (err, domains) {
