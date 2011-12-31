@@ -1,6 +1,7 @@
 # node-clouddns
 
-An incomplete fork of [nodejitsu's node-clouddns](https://github.com/nodejitsu/node-clouddns), ripped apart and refitted for Rackspace Cloud DNS API.
+An incomplete fork of [nodejitsu's node-cloudfiles](https://github.com/nodejitsu/node-cloudfiles), ripped apart and refitted for Rackspace Cloud DNS API.
+WARNING: This could very well break your rackspace account, I am not responsible. Don't say I didn't warn you.
 
 ## Installation
 
@@ -104,7 +105,7 @@ We also have the ability to import and export BIND9 db files, check out the test
       	});
       	
       	//Or pass bare object, we're crazy like that
-      	domain.subdomains.domains[0].updateDomain({comment: "My fav domain"}function(err, domain){
+      	domain.subdomains.domains[0].updateDomain({comment: "My fav domain", ... }function(err, domain){
       		console.dir(domain);
       	});
       	
