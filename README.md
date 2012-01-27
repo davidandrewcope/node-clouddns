@@ -209,7 +209,7 @@ Once you have valid Rackspace credentials you can run tests with npm and [vows][
 #### Author: [Andrew Cope](https://github.com/davidandrewcope)
 #### Contributors: \[This space available for purchase, cost 3 easy payments of pull requests :-) \]
 
-### Based on the node-cloudfiles library by the following
+### Based on the [node-cloudfiles](https://github.com/nodejitsu/node-cloudfiles) library by the following
 
 #### Author: [Charlie Robbins](http://www.charlierobbins.com)
 #### Contributors: [Fedor Indutny](http://github.com/donnerjack13589), [aaronds](https://github.com/aaronds)
