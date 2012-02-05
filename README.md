@@ -1,13 +1,9 @@
 # node-clouddns
 
-An incomplete fork of [nodejitsu's node-cloudfiles](https://github.com/nodejitsu/node-cloudfiles), ripped apart and refitted for Rackspace Cloud DNS API.
-WARNING: This could very well break your rackspace account, I am not responsible. Don't say I didn't warn you.
+Originally a fork of [nodejitsu's node-cloudfiles](https://github.com/nodejitsu/node-cloudfiles), ripped apart and refitted for Rackspace Cloud DNS API.
 
 ## Installation
 
-This module is not yet available via npm. (Comming soon)
-<!--
-This is not yet pushed to npm
 ### Installing npm (node package manager)
 ``` bash
   $ curl http://npmjs.org/install.sh | sh
@@ -17,9 +13,8 @@ This is not yet pushed to npm
 ``` bash
   $ npm install clouddns
 ```
--->
 
-### [Getting Rackspace Account][3]
+### [Getting a Rackspace Account][3]
 
 
 ## Usage
