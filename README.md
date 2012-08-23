@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/davidandrewcope/node-clouddns.png)](http://travis-ci.org/davidandrewcope/node-clouddns)
 # node-clouddns
 
 Originally a fork of [nodejitsu's node-cloudfiles](https://github.com/nodejitsu/node-cloudfiles), ripped apart and refitted for Rackspace Cloud DNS API.
